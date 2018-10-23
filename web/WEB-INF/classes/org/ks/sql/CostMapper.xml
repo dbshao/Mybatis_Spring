@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ks.dao.CostDao">
+	<!--查询所有的cost-->
+	<!--标签定义的select语句
+	1、id，按照id查找到对应的sql语句
+	2、parameterType=""参数类型 相当于以前设置的？
+	3、resultType 结果映射类型，此处值得是记录对应的实体类-->
+	<select id="findAll" resultType="org.ks.entity.Cost">
+		SELECT * FROM cost
+	</select>
+
+	<!--参数类型可以写全称，java.lang.Integer,也可以简写，一般都小写int,double
+	一个参数时，表达式中的参数可以随便写，多个的时候，要和字段名保持一致-->
+	<select id="findById" parameterType="int" resultType="org.ks.entity.Cost">
+		SELECT * FROM cost WHERE cost_id=#{id}
+	</select>
+
+
+		<!--多个参数时，表达式中的名称要和cost的属性对应，若某个字段插入时的值有可能有值也有
+	可能为null值，当值为null时，则Mybatis就无法判断该null值为何种类型，就会出现错误（在执行sql时
+	mybatis会自动通过对象的属性给sql中的参数赋值，他会自动将Java数据类型转成数据库表中对应的类型，
+	一旦传入null值就无法判断该参数为何种类型，就有可能出现类型转换错误）
+	此时需要我们制定类型，可以通过jdbcType制定对应类型,建议每个字段都手动指定jdbcType类型-->
+	<insert id="save" parameterType="org.ks.entity.Cost">
+		INSERT INTO cost (name,base_duration,base_cost,unit_cost,status,
+		descr,creatime,startime,cost_type) VALUES (#{name},#{base_duration},#{base_cost},
+		#{unit_cost},#{status},#{descr},#{creatime},#{startime,jdbcType=TIMESTAMP},#{cost_type})
+	</insert>
+
+	<!--开通业务-->
+	 <!--使用map作为参数，以key-value的形式设定，简化操作，
+	此时，表达式中的名称就是map中的key，一般用于当参数较少时
+	（某个实体类的属性较少应用）-->
+		<update id="start" parameterType="map">
+			UPDATE cost SET  status='1',startime=#{startime} WHERE cost_id=#{id}
+		</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM cost WHERE cost_id=#{id}
+	</delete>
+
+
+	<!--可以将映射结果封装到map中，获取的时候，key为字段名，(oracle数据库中要大写，mysql中是小写）-->
+	<select id="findNameById" parameterType="int" resultType="map">
+		SELECT cost_id,name FROM cost WHERE cost_id=#{id}
+	</select>
+
+</mapper>

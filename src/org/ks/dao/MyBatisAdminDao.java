@@ -5,6 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by itachi on 2017/2/10.
@@ -31,5 +32,11 @@ public class MyBatisAdminDao implements AdminDao {
     public Admin findByCode(String adminCode) {
         Admin admin=template.selectOne("findByCode",adminCode);
         return admin;
+    }
+
+    @Override
+    public List<Admin> findAll(){
+        List<Admin> list=template.selectList("findAll");
+        return list;
     }
 }

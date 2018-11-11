@@ -33,7 +33,9 @@ public class TestCase {
     @Test
     public void test3(){
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-        AdminDao dao=ac.getBean("dao1",AdminDao.class);
-        System.out.println(dao.findByCode("caocao"));
+        AdminDao dao=ac.getBean("adminDao",AdminDao.class);
+        System.out.println(dao.findAll());
     }
+
+
 }

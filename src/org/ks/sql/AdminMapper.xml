@@ -6,4 +6,7 @@
 		SELECT * FROM admin WHERE admin_code=#{code}
 	</select>
 
+    <select id="findAll" resultType="org.ks.entity.Admin" >
+        SELECT * FROM admin
+    </select>
 </mapper>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>鼠标悬停图片上显示文字</title>
+    <style>
+        img{border:0}/* css 注释说明：设置图片边框为0 */
+        body{behavior:url("csshover.htc");text-align:center;}/* css注释说明：兼容ie6 支持标签使用hover */
+        .divcss5{ position:relative;width:554px; height:422px;margin:0 auto}
+        /*.divcss5 a,.divcss5 span{display:none; text-decoration:none}*/
+        .divcss5:hover{cursor:pointer}
+        .divcss5:hover a.now{cursor:pointer; position:absolute; top:0; width:100%; height:100%; z-index:100; left:0; display:block;}
+        .divcss5:hover span
+        {
+            width:554px;
+            height:422px;
+            position:absolute;
+            animation:myfirst 2s;
+            -webkit-animation:myfirst 2s;
+            animation-fill-mode: forwards;
+        }
+        @-webkit-keyframes myfirst /* Safari and Chrome */
+        {
+
+            0%  { height:0px;bottom:50px;}
+            25%  { height:130px;bottom:50px;}
+            50%  { height:160px;bottom:50px;}
+            75%  { height:190px; bottom:50px;}
+            100% { height:210px;bottom:50px;}
+        }
+
+    </style>
+</head>
+<body>
+
+<!--<div class="divcss5" style="background:url(imgexp.png)">
+    <span>当岁月在她脸上留下痕迹的时候，就算是时间也会后悔吧。</span>
+    <a href="" class="now">&nbsp;</a>
+</div>-->
+
+<div class="divcss5" style="background:url(imgexp.png)">
+    <span><br>十年生死两茫茫，不思量，自难忘。</br>千里孤坟，无处话凄凉。</br>纵使相逢应不识，尘满面，鬓如霜。</br>
+夜来幽梦忽还乡，小轩窗，正梳妆。</br>相顾无言，惟有泪千行。</br>料得年年肠断处，明月夜，短松冈。</span>
+
+    <!--<a href="" class="now">&nbsp;</a>-->
+</div>
+
+</body>
+</html>
